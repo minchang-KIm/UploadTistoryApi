@@ -28,7 +28,8 @@ def getAuthenticationCode():
 # Access Token 발급
 # https://tistory.github.io/document-tistory-apis/auth/authorization_code.html
 def getAccessToken():
-    code = "9d456e72dbe8fd3b468310028a3055d0212632b25d7c0da2e7beacdee67b830e74132cdd"
+    #code = "9d456e72dbe8fd3b468310028a3055d0212632b25d7c0da2e7beacdee67b830e74132cdd"
+    code = "e6bcba786069051d4bcfcb9218c7907b929474dd103ecf510a381cb97aeb4ecd0d05fe58"
     grant_type = "authorization_code"
 
     url = "https://www.tistory.com/oauth/access_token?" + \
@@ -41,6 +42,14 @@ def getAccessToken():
     res = requests.get(url)
     return res
 
+if __name__ == "__main__":
+    load_dotenv()
+    client_id = os.environ.get("client_id")
+    client_secret = os.environ.get("client_secret")
+    access_token = os.environ.get("access_token")
+    redirect_uri = os.environ.get("redirect_uri")
+
+
 # 자신의 블로그 정보
 # https://tistory.github.io/document-tistory-apis/apis/v1/blog/list.html
 def BlogInfo(output_type="xml"):
@@ -49,7 +58,18 @@ def BlogInfo(output_type="xml"):
           "output=" + output_type
     res = requests.get(url).content
     print("getBLogInfo : ", url)
+    return res
     return json.loads(res)
+
+if __name__ == "__main__":
+    load_dotenv()
+    client_id = str(os.environ.get("client_id"))
+    client_secret = str(os.environ.get("client_secret"))
+    access_token = os.environ.get("access_token")
+    redirect_uri = os.environ.get("redirect_uri")
+    a = BlogInfo()
+    print(a)
+    #json_obj = json.loads(a)
 
 # 글 목록
 # https://tistory.github.io/document-tistory-apis/apis/v1/post/list.html
